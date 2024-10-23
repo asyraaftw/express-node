@@ -1,11 +1,50 @@
-const express = require("express");
+import express from "express";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+
 const app = express();
-const port = 8888;
+const PORT = 4000;
 
-app.get("/", (request, result) => {
-  result.send("Hello World!");
-});
+const typeDefs = `
+  type Book {
+    title: String
+    author: String
+  }
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+  type Query {
+    books: [Book]
+  }
+`;
+
+const books = [
+  {
+    title: "The Awakening",
+    author: "Bedu",
+  },
+  {
+    title: "Aku Sebuah Pena",
+    author: "Azroy",
+  },
+];
+
+const resolvers = {
+  Query: {
+    books: () => books,
+  },
+};
+
+async function startApolloServer() {
+  const server = new ApolloServer({ typeDefs, resolvers });
+
+  try {
+    const { url } = await startStandaloneServer(server, {
+      listen: { port: PORT },
+    });
+
+    console.log(`👁️ Ready : ${url}`);
+  } catch (error) {
+    console.error("❌ Error : ", error);
+  }
+}
+
+startApolloServer();
