@@ -24,6 +24,7 @@
   "homepage": "https://github.com/asyraaftw/express-tuto#readme",
   "dependencies": {
     "@apollo/server": "^4.11.0",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "graphql": "^16.9.0",
     "nodemon": "^3.1.7",

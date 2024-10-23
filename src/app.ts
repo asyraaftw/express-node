@@ -4,49 +4,31 @@ import express from "express";
 import "reflect-metadata";
 import { AppDataSource } from "./dataSource.ts";
 import { User } from "./entity/user.ts";
+import dotenv from "dotenv";
+
+// dumb
+import testTypeDefs from "./graphql/typeDef/testTypeDefs.ts";
+import testResolver from "./graphql/resolver/testResolver.ts";
+
+// dotenv
+dotenv.config();
 
 const app = express();
-const PORT = 4000;
-
-const typeDefs = `
-  type Book {
-    title: String
-    author: String
-  }
-
-  type Query {
-    books: [Book]
-  }
-`;
-
-const books = [
-  {
-    title: "The Awakening",
-    author: "Bedu",
-  },
-  {
-    title: "Aku Sebuah Pena",
-    author: "Azroy",
-  },
-];
-
-const resolvers = {
-  Query: {
-    books: () => books,
-  },
-};
+const PORT = Number(process.env.PORT);
 
 async function startApolloServer() {
-  const server = new ApolloServer({ typeDefs, resolvers });
-
-  app.get("/user", async (request: any, result: any) => {
-    const user1 = await AppDataSource?.getRepository(User).find();
-
-    result?.json(user1);
+  const server = new ApolloServer({
+    typeDefs: testTypeDefs,
+    resolvers: testResolver,
   });
 
-  app.post("/user", async (req, res) => {
-    const user = await AppDataSource?.getRepository(User).save(req.body);
+  app.get("/entity/user", async (request: any, result: any) => {
+    const user = await AppDataSource.getRepository(User).find();
+    result.json(user);
+  });
+
+  app.post("/entity/user", async (req, res) => {
+    const user = await AppDataSource.getRepository(User).save(req.body);
     res.json(user);
   });
 
