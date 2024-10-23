@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "watch": ["dist"],
+  "ext": "js",
+  "exec": "node ./dist/app.js",
+  "ignore": ["*.test.js"]
+}

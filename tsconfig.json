@@ -5,9 +5,16 @@
     "moduleResolution": "nodenext", // Enable ESM-style module resolution
     "outDir": "./dist", // Output folder
     "rootDir": "./src", // Source folder
+    "allowImportingTsExtensions": true, // Import stuff
+    "emitDeclarationOnly": true, // Import stuff
+    "composite": true,
     "strict": true, // Enable strict type-checking
     "esModuleInterop": true, // Allows default imports from CommonJS
-    "skipLibCheck": true // Skip checking type declarations
+    "skipLibCheck": true, // Skip checking type declarations
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "sourceMap": true
   },
   "include": ["src/**/*"] // Specify source files
 }

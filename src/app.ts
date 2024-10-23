@@ -1,6 +1,9 @@
-import express from "express";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import express from "express";
+import "reflect-metadata";
+import { AppDataSource } from "./dataSource.ts";
+import { User } from "./entity/user.ts";
 
 const app = express();
 const PORT = 4000;
@@ -35,6 +38,17 @@ const resolvers = {
 
 async function startApolloServer() {
   const server = new ApolloServer({ typeDefs, resolvers });
+
+  app.get("/user", async (request: any, result: any) => {
+    const user1 = await AppDataSource?.getRepository(User).find();
+
+    result?.json(user1);
+  });
+
+  app.post("/user", async (req, res) => {
+    const user = await AppDataSource?.getRepository(User).save(req.body);
+    res.json(user);
+  });
 
   try {
     const { url } = await startStandaloneServer(server, {
