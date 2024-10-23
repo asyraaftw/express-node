@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // Target ES6 or newer
+    "module": "NodeNext", // Use ES6 modules
+    "moduleResolution": "nodenext", // Enable ESM-style module resolution
+    "outDir": "./dist", // Output folder
+    "rootDir": "./src", // Source folder
+    "strict": true, // Enable strict type-checking
+    "esModuleInterop": true, // Allows default imports from CommonJS
+    "skipLibCheck": true // Skip checking type declarations
+  },
+  "include": ["src/**/*"] // Specify source files
+}
