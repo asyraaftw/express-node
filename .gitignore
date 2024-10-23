@@ -1,4 +1,5 @@
-# Heady stuff
+# Heavy stuff
 node_modules
 package-lock.json
 dist
+./dist
