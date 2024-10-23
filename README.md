@@ -1,6 +1,4 @@
-# express-tuto
-
-## My playground
+# My tutorial playground
 
 ### Requirements
 
